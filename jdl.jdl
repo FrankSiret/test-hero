@@ -1,0 +1,10 @@
+entity SuperHero {
+    name String,
+    age Integer,
+    superpower String
+}
+
+dto * with mapstruct
+paginate * with pagination
+service * with serviceClass
+filter *

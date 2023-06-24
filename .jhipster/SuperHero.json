@@ -1,0 +1,28 @@
+{
+  "applications": "*",
+  "changelogDate": "20230624230827",
+  "dto": "mapstruct",
+  "embedded": false,
+  "entityTableName": "super_hero",
+  "fields": [
+    {
+      "fieldName": "name",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "age",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "superpower",
+      "fieldType": "String"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": true,
+  "name": "SuperHero",
+  "pagination": "pagination",
+  "readOnly": false,
+  "relationships": [],
+  "service": "serviceClass"
+}
