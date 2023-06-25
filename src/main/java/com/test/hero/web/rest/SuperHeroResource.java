@@ -3,6 +3,7 @@ package com.test.hero.web.rest;
 import com.test.hero.repository.SuperHeroRepository;
 import com.test.hero.service.SuperHeroQueryService;
 import com.test.hero.service.SuperHeroService;
+import com.test.hero.service.RequestTiming;
 import com.test.hero.service.criteria.SuperHeroCriteria;
 import com.test.hero.service.dto.SuperHeroDTO;
 import com.test.hero.web.rest.errors.BadRequestAlertException;
@@ -61,6 +62,7 @@ public class SuperHeroResource {
      * @return the {@link ResponseEntity} with status {@code 201 (Created)} and with body the new superHeroDTO, or with status {@code 400 (Bad Request)} if the superHero has already an ID.
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
+    @RequestTiming
     @PostMapping("/super-heroes")
     public ResponseEntity<SuperHeroDTO> createSuperHero(@RequestBody SuperHeroDTO superHeroDTO) throws URISyntaxException {
         log.debug("REST request to save SuperHero : {}", superHeroDTO);
@@ -84,6 +86,7 @@ public class SuperHeroResource {
      * or with status {@code 500 (Internal Server Error)} if the superHeroDTO couldn't be updated.
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
+    @RequestTiming
     @PutMapping("/super-heroes/{id}")
     public ResponseEntity<SuperHeroDTO> updateSuperHero(
         @PathVariable(value = "id", required = false) final Long id,
@@ -119,6 +122,7 @@ public class SuperHeroResource {
      * or with status {@code 500 (Internal Server Error)} if the superHeroDTO couldn't be updated.
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
+    @RequestTiming
     @PatchMapping(value = "/super-heroes/{id}", consumes = { "application/json", "application/merge-patch+json" })
     public ResponseEntity<SuperHeroDTO> partialUpdateSuperHero(
         @PathVariable(value = "id", required = false) final Long id,
@@ -151,6 +155,7 @@ public class SuperHeroResource {
      * @param criteria the criteria which the requested entities should match.
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of superHeroes in body.
      */
+    @RequestTiming
     @GetMapping("/super-heroes")
     public ResponseEntity<List<SuperHeroDTO>> getAllSuperHeroes(
         SuperHeroCriteria criteria,
@@ -168,6 +173,7 @@ public class SuperHeroResource {
      * @param criteria the criteria which the requested entities should match.
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the count in body.
      */
+    @RequestTiming
     @GetMapping("/super-heroes/count")
     public ResponseEntity<Long> countSuperHeroes(SuperHeroCriteria criteria) {
         log.debug("REST request to count SuperHeroes by criteria: {}", criteria);
@@ -180,6 +186,7 @@ public class SuperHeroResource {
      * @param id the id of the superHeroDTO to retrieve.
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the superHeroDTO, or with status {@code 404 (Not Found)}.
      */
+    @RequestTiming
     @GetMapping("/super-heroes/{id}")
     public ResponseEntity<SuperHeroDTO> getSuperHero(@PathVariable Long id) {
         log.debug("REST request to get SuperHero : {}", id);
@@ -193,6 +200,7 @@ public class SuperHeroResource {
      * @param id the id of the superHeroDTO to delete.
      * @return the {@link ResponseEntity} with status {@code 204 (NO_CONTENT)}.
      */
+    @RequestTiming
     @DeleteMapping("/super-heroes/{id}")
     public ResponseEntity<Void> deleteSuperHero(@PathVariable Long id) {
         log.debug("REST request to delete SuperHero : {}", id);
