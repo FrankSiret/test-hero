@@ -53,6 +53,7 @@ public class SuperHeroService {
         log.debug("Request to update SuperHero : {}", superHeroDTO);
         SuperHero superHero = superHeroMapper.toEntity(superHeroDTO);
         superHero = superHeroRepository.save(superHero);
+        Objects.requireNonNull(cacheManager.getCache("superHero")).evict(superHero.id);
         return superHeroMapper.toDto(superHero);
     }
 
@@ -72,7 +73,11 @@ public class SuperHeroService {
 
                 return existingSuperHero;
             })
-            .map(superHeroRepository::save)
+            .map(superHero -> {
+                superHero = superHeroRepository.save(superHero)
+                Objects.requireNonNull(cacheManager.getCache("superHero")).evict(superHero.id);
+                return superHero;
+            })
             .map(superHeroMapper::toDto);
     }
 
@@ -94,6 +99,7 @@ public class SuperHeroService {
      * @param id the id of the entity.
      * @return the entity.
      */
+    @Cacheable("superHero")
     @Transactional(readOnly = true)
     public Optional<SuperHeroDTO> findOne(Long id) {
         log.debug("Request to get SuperHero : {}", id);

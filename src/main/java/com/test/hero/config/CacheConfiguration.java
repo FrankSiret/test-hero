@@ -38,6 +38,7 @@ public class CacheConfiguration {
         return cm -> {
             createCache(cm, com.test.hero.repository.UserRepository.USERS_BY_LOGIN_CACHE);
             createCache(cm, com.test.hero.repository.UserRepository.USERS_BY_EMAIL_CACHE);
+            createCache(cm, "superHero");
             // jhipster-needle-ehcache-add-entry
         };
     }
